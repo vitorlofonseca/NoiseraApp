@@ -5,7 +5,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const DataNotFoundComponent = (props) => {
     return (
         <View>
-            <Text style={styles.loadingText}>
+            <Text style={styles.noDataFoundText}>
                 {props.dataName} not found
             </Text>
         </View>

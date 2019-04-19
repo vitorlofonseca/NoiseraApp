@@ -11,13 +11,6 @@ var styles = React.StyleSheet.create({
         fontWeight: 'bold'
     },
 
-    searchTrackSpotify: {
-        width: 330,
-        height: 40,
-        marginLeft: 10,
-        marginTop: 5,
-    },
-
     inputText: {
         height: 40,
         marginLeft: 10,
