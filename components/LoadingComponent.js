@@ -1,17 +1,15 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-export default class LoadingComponent extends React.Component {
-    render (){
-        return (
-            <View>
-                <Text style={styles.loadingText}>
-                Loading {this.props.itemName}...
-                </Text>
-            </View>
+const LoadingComponent = (props) => {
+    return (
+        <View>
+            <Text style={styles.loadingText}>
+            Loading {props.itemName}...
+            </Text>
+        </View>
         );
-    }
-}
+};
 
 const styles = StyleSheet.create({
     loadingText: {
@@ -22,3 +20,5 @@ const styles = StyleSheet.create({
         paddingTop: 30
     }
 });
+
+export default LoadingComponent;

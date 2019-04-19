@@ -2,17 +2,15 @@ import React from 'react';
 
 import { View, Text, StyleSheet } from 'react-native';
 
-export default class DataNotFoundComponent extends React.Component {
-    render (){
-        return (
-            <View>
-                <Text style={styles.noDataFoundText}>
-                    No {this.props.dataName} found
-                </Text>
-            </View>
+const DataNotFoundComponent = (props) => {
+    return (
+        <View>
+            <Text style={styles.loadingText}>
+                {props.dataName} not found
+            </Text>
+        </View>
         );
-    }
-}
+};
 
 const styles = StyleSheet.create({
     noDataFoundText: {
@@ -24,3 +22,5 @@ const styles = StyleSheet.create({
         paddingBottom: 30
     }
 });
+
+export default DataNotFoundComponent;
