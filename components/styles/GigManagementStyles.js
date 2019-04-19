@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 
 var styles = React.StyleSheet.create({
     boxTitle: {
@@ -8,7 +8,7 @@ var styles = React.StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         marginLeft: 10,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
 
     inputText: {
@@ -19,7 +19,7 @@ var styles = React.StyleSheet.create({
     },
 
     btnSaveGig: {
-        marginBottom: 20
+        marginBottom: 20,
     },
 
     box: {
@@ -27,12 +27,12 @@ var styles = React.StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
         marginTop: 20,
-        borderRadius:10,
+        borderRadius: 10,
     },
 
     rootView: {
         backgroundColor: 'lightgrey',
-        height: 100000
+        height: 100000,
     },
 
     boxTitle: {
@@ -40,7 +40,7 @@ var styles = React.StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         marginLeft: 10,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
 
     searchTrackSpotify: {
@@ -56,8 +56,8 @@ var styles = React.StyleSheet.create({
         lineHeight: 24,
         textAlign: 'center',
         paddingTop: 20,
-        paddingBottom: 20
-    }
-});
+        paddingBottom: 20,
+    },
+})
 
-module.exports = styles;
+module.exports = styles

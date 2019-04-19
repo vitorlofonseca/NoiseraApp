@@ -1,7 +1,7 @@
-import { Track } from "./TrackModel";
+import { Track } from './TrackModel'
 
 export default interface Gig {
-    tracks: Array<Track>,
-    name: string,
+    tracks: Array<Track>
+    name: string
     description: string
 }

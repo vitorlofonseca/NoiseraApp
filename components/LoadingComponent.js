@@ -1,15 +1,13 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React from 'react'
+import { Text, View, StyleSheet } from 'react-native'
 
-const LoadingComponent = (props) => {
+const LoadingComponent = props => {
     return (
         <View>
-            <Text style={styles.loadingText}>
-            Loading {props.itemName}...
-            </Text>
+            <Text style={styles.loadingText}>Loading {props.itemName}...</Text>
         </View>
-        );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     loadingText: {
@@ -17,8 +15,8 @@ const styles = StyleSheet.create({
         color: 'rgba(96,100,109, 1)',
         lineHeight: 24,
         textAlign: 'center',
-        paddingTop: 30
-    }
-});
+        paddingTop: 30,
+    },
+})
 
-export default LoadingComponent;
+export default LoadingComponent

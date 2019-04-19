@@ -1,41 +1,48 @@
-import React from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity, Button } from 'react-native';
-import TracksSearchComponent from '../components/TracksSearchComponent';
-import AddedTracksListComponent from './AddedTracksListComponent';
+import React from 'react'
+import {
+    View,
+    Text,
+    TextInput,
+    ScrollView,
+    TouchableOpacity,
+    Button,
+} from 'react-native'
+import TracksSearchComponent from '../components/TracksSearchComponent'
+import AddedTracksListComponent from './AddedTracksListComponent'
 
-const styles = require('./styles/GigManagementStyles');
+const styles = require('./styles/GigManagementStyles')
 
 export default class GigManagementComponent extends React.Component {
-    constructor(props){
-        super(props);
+    constructor(props) {
+        super(props)
 
         this.state = {
             foundTracks: [],
             addedTracks: [],
-            searchHappened: false
-        };  
+            searchHappened: false,
+        }
     }
 
-    addTrack = (item) => {
-        const setState = this.setState.bind(this);
+    addTrack = item => {
+        const setState = this.setState.bind(this)
 
         var index = this.state.addedTracks.find(function(addedTrack) {
-            return addedTrack.spotifyId == item.spotifyId;
-        });
+            return addedTrack.spotifyId == item.spotifyId
+        })
 
-        if(index == null){
-            let newAddedTracksArray = this.state.addedTracks;
-            newAddedTracksArray.push(item);
+        if (index == null) {
+            let newAddedTracksArray = this.state.addedTracks
+            newAddedTracksArray.push(item)
 
-            setState({addedTracks: newAddedTracksArray});
+            setState({ addedTracks: newAddedTracksArray })
         }
-    };
+    }
 
-    saveGig = () =>{
-        this.state.navigation.navigate('ListGigsScreen');
-    };
+    saveGig = () => {
+        this.state.navigation.navigate('ListGigsScreen')
+    }
 
-    render(){      
+    render() {
         return (
             <ScrollView style={styles.rootView}>
                 <View style={styles.box}>
@@ -43,23 +50,23 @@ export default class GigManagementComponent extends React.Component {
                     <TextInput
                         style={styles.inputText}
                         placeholder="Gig name"
-                        selectionColor='#000000'
-                        underlineColorAndroid='#555555'
-                        onChangeText={(text) => this.setState({text})}
+                        selectionColor="#000000"
+                        underlineColorAndroid="#555555"
+                        onChangeText={text => this.setState({ text })}
                     />
 
                     <TextInput
                         style={styles.inputText}
                         placeholder="Gig description"
-                        selectionColor='#000000'
-                        underlineColorAndroid='#555555'
-                        onChangeText={(text) => this.setState({text})}
+                        selectionColor="#000000"
+                        underlineColorAndroid="#555555"
+                        onChangeText={text => this.setState({ text })}
                     />
                 </View>
 
                 <View style={styles.box}>
-                    <TracksSearchComponent 
-                        setParentState={this.setState.bind(this)} 
+                    <TracksSearchComponent
+                        setParentState={this.setState.bind(this)}
                         addTrack={this.addTrack}
                     />
                 </View>
@@ -74,15 +81,15 @@ export default class GigManagementComponent extends React.Component {
 
                 <View style={[styles.box, styles.btnSaveGig]}>
                     <TouchableOpacity>
-                        <Button color="grey" 
+                        <Button
+                            color="grey"
                             className="px-4"
-                            title='Save Gig'
+                            title="Save Gig"
                             onPress={() => this.saveGig()}
                         />
                     </TouchableOpacity>
                 </View>
-
             </ScrollView>
-        );
+        )
     }
 }

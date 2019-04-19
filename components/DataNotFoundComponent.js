@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native'
 
-const DataNotFoundComponent = (props) => {
+const DataNotFoundComponent = props => {
     return (
         <View>
             <Text style={styles.noDataFoundText}>
                 {props.dataName} not found
             </Text>
         </View>
-        );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     noDataFoundText: {
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         textAlign: 'center',
         paddingTop: 30,
-        paddingBottom: 30
-    }
-});
+        paddingBottom: 30,
+    },
+})
 
-export default DataNotFoundComponent;
+export default DataNotFoundComponent
