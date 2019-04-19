@@ -4,8 +4,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../home/HomeScreen';
-import GigsScreen from '../gigs/GigsScreen';
-import AddGigScreen from '../gigs/AddGigScreen';
+import ListGigsScreen from '../screens/ListGigsScreen';
+import AddGigScreen from '../screens/AddGigScreen';
 import SettingsScreen from '../settings/SettingsScreen';
 
 const HomeStack = createStackNavigator({
@@ -27,7 +27,7 @@ HomeStack.navigationOptions = {
 };
 
 const GigsStack = createStackNavigator({
-  Gigs: GigsScreen,
+  Gigs: ListGigsScreen,
   AddGigScreen: AddGigScreen,
 });
 

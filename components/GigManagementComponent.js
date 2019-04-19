@@ -1,30 +1,32 @@
 import React from 'react';
-import { View, TextInput, FlatList, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
-import { Icon, ListItem } from 'react-native-elements'
-import { SearchTracks } from './GigsHttpService';
-import NoDataFound from '../components/NoDataFound';
-import GigManagementScreen from '../components/GigManagementScreen';
+import { ListItem, Icon } from 'react-native-elements';
+import { View, StyleSheet, Text, TextInput, FlatList, ScrollView, TouchableOpacity, Button } from 'react-native';
+import DataNotFoundComponent from '../components/DataNotFoundComponent';
+import { SearchTracks } from "../services/GigsHttpService";
 
-export default class AddGigScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Add Gig'
-    }
+var styles = require('./styles/GigManagementStyles');
 
-    constructor(){
-        super();
+export default class GigManagementComponent extends React.Component {
+    constructor(props){
+        super(props);
+
         this.state = {
             trackName: "",
             foundTracks: [],
             addedTracks: [],
             searchHappened: false
         };  
-
-        this.handler = this.handler.bind(this)
     }
 
-    handler() {
-        this.setState({})
-    }
+    renderFoundTrack = ({item}) => (
+        <ListItem
+            key={item.spotifyId}
+            leftAvatar={{ source: { uri: item.image } }}
+            onPress={() => this.addTrack(item)}
+            title={item.name}
+            subtitle={item.artist + " - " + item.album}
+        />
+    );
 
     renderAddedTrack = ({item}) => (
         <ListItem
@@ -36,11 +38,40 @@ export default class AddGigScreen extends React.Component {
         />
     );
 
+    searchTrack = () => {
+        const setState = this.setState.bind(this);
+
+        SearchTracks(this.state.trackName)
+        .then(function(tracks){
+            setState({foundTracks: tracks, searchHappened: true});
+        });
+    };
+
+    addTrack = (item) => {
+        const setState = this.setState.bind(this);
+
+        var index = this.state.addedTracks.find(function(addedTrack) {
+            return addedTrack.spotifyId == item.spotifyId;
+        });
+
+        if(index == null){
+            let newAddedTracksArray = this.state.addedTracks;
+            newAddedTracksArray.push(item);
+
+            setState({addedTracks: newAddedTracksArray});
+        }
+    };
+
+    saveGig = () =>{
+        this.state.navigation.navigate('ListGigsScreen');
+    };
+
     removeAddedTrack = (item) => {
+        const setState = this.setState.bind(this);
+
         for(let i=0 ; i < this.state.addedTracks.length ; i++){
             let addedTrack = this.state.addedTracks[i];
             if(addedTrack.spotifyId == item.spotifyId){
-                const setState = this.setState.bind(this);  
                 let updatedAddedTracks = this.state.addedTracks;
                 updatedAddedTracks.splice(i, 1);
                 setState({"addedTracks": updatedAddedTracks});    
@@ -48,22 +79,41 @@ export default class AddGigScreen extends React.Component {
         }
     };
 
-    saveGig = () =>{
-        this.props.navigation.navigate('GigsScreen');
-    };
-
     render(){      
         let foundTracks = null;
         let addedTracks = null;
 
-        //console.log("ASOKKOSAOKPKOPSA ", this.state);
-
         if (this.state.searchHappened && this.state.foundTracks.length == 0){
             foundTracks = (
-                <NoDataFound dataName="tracks"/>
+                <DataNotFoundComponent dataName="tracks"/>
             );
         } else {
-            foundTracks = (<GigManagementScreen foundTracks={this.state.foundTracks} handler={this.handler}/>);
+            foundTracks = (
+                            <View>
+                                <Text style={styles.boxTitle}>Tracks search</Text>
+                                <View style={{flexDirection: 'row'}}>
+                                    <TextInput
+                                        style={styles.searchTrackSpotify}
+                                        placeholder="Search tracks"
+                                        selectionColor='#000000'
+                                        underlineColorAndroid='#555555'
+                                        onChangeText={(trackName) => this.setState({ trackName: trackName })}
+                                    />
+
+                                    <Icon
+                                        name='search'
+                                        type='font-awesome'
+                                        onPress={this.searchTrack}
+                                        size={30}
+                                        />
+                                </View>
+
+                                <FlatList
+                                    data={this.state.foundTracks}
+                                    renderItem={this.renderFoundTrack}
+                                    keyExtractor = { (item, index) => index.toString() }
+                                />
+                            </View>);
         }
 
         if (this.state.searchHappened && this.state.addedTracks.length == 0){
@@ -118,7 +168,7 @@ export default class AddGigScreen extends React.Component {
                         <Button color="grey" 
                             className="px-4"
                             title='Save Gig'
-                            onPress={() => saveGig()}
+                            onPress={() => this.saveGig()}
                         />
                     </TouchableOpacity>
                 </View>
@@ -126,54 +176,4 @@ export default class AddGigScreen extends React.Component {
             </ScrollView>
         );
     }
-}
-
-const styles = {
-    inputText: {
-        height: 40,
-        marginLeft: 10,
-        marginTop: 10,
-        marginRight: 10,
-    },
-
-    btnSaveGig: {
-        marginBottom: 20
-    },
-
-    box: {
-        backgroundColor: 'white',
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 20,
-        borderRadius:10,
-    },
-
-    rootView: {
-        backgroundColor: 'lightgrey',
-        height: 100000
-    },
-
-    boxTitle: {
-        fontSize: 15,
-        marginBottom: 10,
-        marginTop: 10,
-        marginLeft: 10,
-        fontWeight: 'bold'
-    },
-
-    searchTrackSpotify: {
-        width: 330,
-        height: 40,
-        marginLeft: 10,
-        marginTop: 5,
-    },
-
-    noTracksText: {
-        fontSize: 20,
-        color: 'rgba(96,100,109, 1)',
-        lineHeight: 24,
-        textAlign: 'center',
-        paddingTop: 20,
-        paddingBottom: 20
-    },
 }

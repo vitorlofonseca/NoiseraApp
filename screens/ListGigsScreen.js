@@ -1,12 +1,12 @@
 import React from 'react';
 import { FlatList, StyleSheet, View, Text, TouchableOpacity, Button } from 'react-native';
 import { ListItem } from 'react-native-elements'
-import { GetGigs } from './GigsHttpService'
-import LoadingScreen from '../components/LoadingScreen';
-import NoDataFound from '../components/NoDataFound';
+import { GetGigs } from '../services/GigsHttpService'
+import LoadingComponent from '../components/LoadingComponent';
+import DataNotFoundComponent from '../components/DataNotFoundComponent';
 
 
-export default class GigsScreen extends React.Component {
+export default class ListGigsScreen extends React.Component {
   static navigationOptions = {
     title: 'Gigs',
   };
@@ -26,7 +26,7 @@ export default class GigsScreen extends React.Component {
       });
   } 
 
-  _renderGig = ({item}) => (
+  renderGig = ({item}) => (
     <ListItem
       key={item.key}
       leftAvatar={{ source: { uri: item.avatar } }}
@@ -38,17 +38,17 @@ export default class GigsScreen extends React.Component {
   render() {
 
     if (this.state._gigs === null){
-        return <LoadingScreen itemName="GIGs"/>;
+        return <LoadingComponent itemName="GIGs"/>;
     }
 
     if (this.state._gigs !== null && this.state._gigs.length == 0){
-      return <NoDataFound dataName="GIGs"/>;
+      return <DataNotFoundComponent dataName="GIGs"/>;
   }
 
     return (<View style={styles.container}>
               <FlatList
                 data={this.state._gigs}
-                renderItem={this._renderGig}
+                renderItem={this.renderGig}
                 keyExtractor = { (item, index) => index.toString() }
               />
               <View style={{textAlign: 'right'}}>
