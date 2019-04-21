@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+    Alert,
     View,
     Text,
     TextInput,
@@ -17,6 +18,8 @@ export default class GigManagementComponent extends React.Component {
         super(props)
 
         this.state = {
+            gigName: '',
+            gigDescription: '',
             foundTracks: [],
             addedTracks: [],
             searchHappened: false,
@@ -39,7 +42,15 @@ export default class GigManagementComponent extends React.Component {
     }
 
     saveGig = () => {
-        this.state.navigation.navigate('ListGigsScreen')
+        if (!this.state.gigName) {
+            Alert.alert(':(', 'You need to define a name to gig')
+            return
+        }
+
+        if (this.state.addedTracks.length == 0) {
+            Alert.alert(':(', 'You need add at least one track to the gig')
+            return
+        }
     }
 
     render() {
@@ -52,7 +63,7 @@ export default class GigManagementComponent extends React.Component {
                         placeholder="Gig name"
                         selectionColor="#000000"
                         underlineColorAndroid="#555555"
-                        onChangeText={text => this.setState({ text })}
+                        onChangeText={text => this.setState({ gigName: text })}
                     />
 
                     <TextInput
@@ -60,7 +71,9 @@ export default class GigManagementComponent extends React.Component {
                         placeholder="Gig description"
                         selectionColor="#000000"
                         underlineColorAndroid="#555555"
-                        onChangeText={text => this.setState({ text })}
+                        onChangeText={text =>
+                            this.setState({ gigDescription: text })
+                        }
                     />
                 </View>
 
