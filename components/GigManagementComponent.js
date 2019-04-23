@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import TracksSearchComponent from '../components/TracksSearchComponent'
 import AddedTracksListComponent from './AddedTracksListComponent'
+import { SaveGig } from '../services/GigsHttpService'
 
 const styles = require('./styles/GigManagementStyles')
 
@@ -51,6 +52,16 @@ export default class GigManagementComponent extends React.Component {
             Alert.alert(':(', 'You need add at least one track to the gig')
             return
         }
+
+        let newGig = {
+            name: this.state.gigName,
+            description: this.state.gigDescription,
+            tracks: this.state.addedTracks,
+        }
+
+        SaveGig(newGig)
+
+        //this.props.navigation.goBack()
     }
 
     render() {

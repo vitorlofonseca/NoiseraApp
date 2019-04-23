@@ -19,20 +19,21 @@ export default class ListGigsScreen extends React.Component {
     constructor() {
         super()
         this.state = {
-            _gigs: null,
+            gigs: null,
         }
     }
 
     componentDidMount() {
         const setState = this.setState.bind(this)
         GetGigs().then(function(gigs) {
-            setState({ _gigs: gigs })
+            gigs = []
+            setState({ gigs })
         })
     }
 
     renderGig = ({ item }) => (
         <ListItem
-            key={item.key}
+            key={item.index}
             leftAvatar={{ source: { uri: item.avatar } }}
             title={item.name}
             subtitle={item.description}
@@ -40,21 +41,27 @@ export default class ListGigsScreen extends React.Component {
     )
 
     render() {
-        if (this.state._gigs === null) {
+        let gigsList = null
+
+        if (this.state.gigs === null) {
             return <LoadingComponent itemName="GIGs" />
         }
 
-        if (this.state._gigs !== null && this.state._gigs.length == 0) {
-            return <DataNotFoundComponent dataName="GIGs" />
+        if (this.state.gigs !== null && this.state.gigs.length == 0) {
+            gigsList = <DataNotFoundComponent dataName="GIGs" />
+        } else {
+            gigsList = (
+                <FlatList
+                    data={this.state.gigs}
+                    renderItem={this.renderGig}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            )
         }
 
         return (
             <View style={styles.container}>
-                <FlatList
-                    data={this.state._gigs}
-                    renderItem={this.renderGig}
-                    keyExtractor={(item, index) => index.toString()}
-                />
+                {gigsList}
                 <View style={{ textAlign: 'right' }}>
                     <TouchableOpacity>
                         <Button

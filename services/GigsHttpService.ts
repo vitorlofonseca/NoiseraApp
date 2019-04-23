@@ -7,15 +7,26 @@ const urlAwsApi = env.aws.url + env.aws.api
 
 export const GetGigs = () => {
     return new Promise((resolve, reject) => {
-        fetch(urlAwsApi + '/getGigs', {
+        fetch(urlAwsApi + '/gig', {
             method: 'get',
         })
             .then(response => {
                 let responseObject: Array<Gig> = JSON.parse(
                     response['_bodyInit']
-                )
+                )['gigs']
                 resolve(responseObject)
             })
+            .catch(err => reject(err))
+    })
+}
+
+export const SaveGig = (gig: Gig) => {
+    return new Promise((resolve, reject) => {
+        fetch(urlAwsApi + '/gig', {
+            method: 'post',
+            body: JSON.stringify(gig),
+        })
+            .then()
             .catch(err => reject(err))
     })
 }

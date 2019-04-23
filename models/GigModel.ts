@@ -4,4 +4,5 @@ export default interface Gig {
     tracks: Array<Track>
     name: string
     description: string
+    avatar: string
 }

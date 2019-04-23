@@ -7,6 +7,6 @@ export default class AddGigScreen extends React.Component {
     }
 
     render() {
-        return <GigManagementComponent />
+        return <GigManagementComponent navigation={this.props.navigation} />
     }
 }
