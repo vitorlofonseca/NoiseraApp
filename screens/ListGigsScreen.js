@@ -26,7 +26,6 @@ export default class ListGigsScreen extends React.Component {
     componentDidMount() {
         const setState = this.setState.bind(this)
         GetGigs().then(function(gigs) {
-            gigs = []
             setState({ gigs })
         })
     }
