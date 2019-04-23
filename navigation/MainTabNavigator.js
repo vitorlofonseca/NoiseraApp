@@ -11,6 +11,7 @@ import ListGigsScreen from '../screens/ListGigsScreen'
 import ListGroupsScreen from '../screens/ListGroupsScreen'
 import AddGigScreen from '../screens/AddGigScreen'
 import SettingsScreen from '../settings/SettingsScreen'
+import LoginScreen from '../screens/auth/LoginScreen'
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
@@ -74,9 +75,24 @@ SettingsStack.navigationOptions = {
     ),
 }
 
+const LoginStack = createStackNavigator({
+  Login: LoginScreen
+})
+
+LoginStack.navigationOptions = {
+  tabBarLabel: 'LoginScreen',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+    />
+  ),
+};
+
 export default createBottomTabNavigator({
     HomeStack,
     GroupsStack,
     GigsStack,
     SettingsStack,
+    LoginStack
 })
