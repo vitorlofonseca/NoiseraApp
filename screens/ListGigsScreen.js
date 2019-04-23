@@ -33,7 +33,7 @@ export default class ListGigsScreen extends React.Component {
     renderGig = ({ item }) => (
         <ListItem
             key={item.index}
-            leftAvatar={{ source: { uri: item.avatar } }}
+            leftAvatar={{ source: { uri: item.avatar_url } }}
             title={item.name}
             subtitle={item.description}
         />
