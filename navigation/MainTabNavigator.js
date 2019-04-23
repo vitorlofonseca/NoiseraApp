@@ -1,62 +1,82 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from 'react'
+import { Platform } from 'react-native'
+import {
+    createStackNavigator,
+    createBottomTabNavigator,
+} from 'react-navigation'
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../home/HomeScreen';
-import ListGigsScreen from '../screens/ListGigsScreen';
-import AddGigScreen from '../screens/AddGigScreen';
-import SettingsScreen from '../settings/SettingsScreen';
+import TabBarIcon from '../components/TabBarIcon'
+import HomeScreen from '../home/HomeScreen'
+import ListGigsScreen from '../screens/ListGigsScreen'
+import ListGroupsScreen from '../screens/ListGroupsScreen'
+import AddGigScreen from '../screens/AddGigScreen'
+import SettingsScreen from '../settings/SettingsScreen'
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-});
+    Home: HomeScreen,
+})
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+    tabBarLabel: 'Home',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={
+                Platform.OS === 'ios'
+                    ? `ios-information-circle${focused ? '' : '-outline'}`
+                    : 'md-information-circle'
+            }
+        />
+    ),
+}
 
 const GigsStack = createStackNavigator({
-  Gigs: ListGigsScreen,
-  AddGigScreen: AddGigScreen,
-});
+    Gigs: ListGigsScreen,
+    AddGigScreen: AddGigScreen,
+})
 
 GigsStack.navigationOptions = {
-  tabBarLabel: 'Gigs',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-mic' : 'md-mic'}
-    />
-  ),
-};
+    tabBarLabel: 'Gigs',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-mic' : 'md-mic'}
+        />
+    ),
+}
+
+const GroupsStack = createStackNavigator({
+    Groups: ListGroupsScreen,
+    //AddGroupScreen: AddGroupScreen,
+})
+
+GroupsStack.navigationOptions = {
+    tabBarLabel: 'Groups',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-people' : 'md-people'}
+        />
+    ),
+}
 
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
+    Settings: SettingsScreen,
+})
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
+    tabBarLabel: 'Settings',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+        />
+    ),
+}
 
 export default createBottomTabNavigator({
-  HomeStack,
-  GigsStack,
-  SettingsStack,
-});
+    HomeStack,
+    GroupsStack,
+    GigsStack,
+    SettingsStack,
+})
