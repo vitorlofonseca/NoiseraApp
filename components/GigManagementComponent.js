@@ -53,15 +53,22 @@ export default class GigManagementComponent extends React.Component {
             return
         }
 
+        let trackIndex = 0
+
         let newGig = {
             name: this.state.gigName,
             description: this.state.gigDescription,
-            tracks: this.state.addedTracks,
+            tracks: this.state.addedTracks.map(function(addedTracks) {
+                addedTracks.order = trackIndex
+                addedTracks.active = true
+                trackIndex++
+                return addedTracks
+            }),
         }
 
         SaveGig(newGig)
 
-        //this.props.navigation.goBack()
+        this.props.navigation.goBack()
     }
 
     render() {
