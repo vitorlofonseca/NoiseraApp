@@ -56,9 +56,10 @@ export default class GigManagementComponent extends React.Component {
         let trackIndex = 0
 
         let newGig = {
-            name: this.state.gigName,
-            description: this.state.gigDescription,
-            tracks: this.state.addedTracks.map(function(addedTracks) {
+            Name: this.state.gigName,
+            Description: this.state.gigDescription,
+            AvatarUrl: 'https://image.flaticon.com/icons/png/512/37/37543.png',
+            Tracks: this.state.addedTracks.map(function(addedTracks) {
                 addedTracks.order = trackIndex
                 addedTracks.active = true
                 trackIndex++
@@ -67,6 +68,8 @@ export default class GigManagementComponent extends React.Component {
         }
 
         SaveGig(newGig)
+
+        this.props.navigation.state.params.updateGigsList()
 
         this.props.navigation.goBack()
     }

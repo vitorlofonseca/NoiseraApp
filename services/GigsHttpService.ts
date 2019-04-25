@@ -5,9 +5,9 @@ import { Gig } from '../models/GigModel'
 const env = require('../env.js')
 const urlAwsApi = env.aws.url + env.aws.api
 const awsApiKey = env.aws.apikey
-let myHeaders = new Headers()
 
 export const GetGigs = () => {
+    let myHeaders = new Headers()
     myHeaders.append('x-api-key', awsApiKey)
 
     return new Promise((resolve, reject) => {
@@ -18,7 +18,8 @@ export const GetGigs = () => {
             .then(response => {
                 let responseObject: Array<Gig> = JSON.parse(
                     response['_bodyInit']
-                )['gigs']
+                )['Gigs']
+
                 resolve(responseObject)
             })
             .catch(err => reject(err))
@@ -26,10 +27,13 @@ export const GetGigs = () => {
 }
 
 export const SaveGig = (gig: Gig) => {
+    let myHeaders = new Headers()
     myHeaders.append('x-api-key', awsApiKey)
 
+    console.log('kosakosakoppkosa ', JSON.stringify(gig))
+
     return new Promise((resolve, reject) => {
-        fetch(urlAwsApi + '/gig', {
+        fetch(urlAwsApi + 'gig', {
             method: 'post',
             body: JSON.stringify(gig),
             headers: myHeaders,
