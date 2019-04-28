@@ -2,8 +2,8 @@ import React from 'react'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
 import { AppLoading, Asset, Font, Icon } from 'expo'
 import AppNavigator from './navigation/AppNavigator'
-import { refreshTokens } from './auth/refreshTokens'
-import { getTokens } from './auth/getTokens'
+import { refreshSpotifyTokens } from './auth/refreshSpotifyTokens'
+import { getSpotifyTokens } from './auth/getSpotifyTokens'
 
 const env = require('./env')
 
@@ -16,12 +16,12 @@ export default class App extends React.Component {
         const tokenExpirationTime = env.spotify.expirationTime
         const spotifyAccessToken = env.spotify.accessToken
         if (!spotifyAccessToken) {
-            await getTokens()
+            await getSpotifyTokens()
         } else if (
             !tokenExpirationTime ||
             new Date().getTime() > tokenExpirationTime
         ) {
-            await refreshTokens()
+            await refreshSpotifyTokens()
         } else {
             this.setState({ accessTokenAvailable: true })
         }

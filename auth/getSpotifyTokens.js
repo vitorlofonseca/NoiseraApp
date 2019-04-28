@@ -1,8 +1,8 @@
 import { encode as btoa } from 'base-64'
-import { getAuthorizationCode } from '../auth/getRedirectUrl'
+import { getAuthorizationCode } from '../auth/getSpotifyRedirectUrl'
 const env = require('../env')
 
-export const getTokens = async () => {
+export const getSpotifyTokens = async () => {
     try {
         const authorizationCode = await getAuthorizationCode()
         const spotifyAccessData = env.spotify
