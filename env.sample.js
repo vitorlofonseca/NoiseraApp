@@ -1,11 +1,15 @@
 module.exports = {
     aws: {
         url: 'AWS_API_URL',
-        api: '/URL/API/PATH/',
+        api: 'STAGE',
+        apikey: 'API_KEY_AWS',
     },
     spotify: {
         url: 'SPOTIFY_API_URL',
-        bearer: 'BEARER_TOKEN',
-        market: '[BR, US, ...]',
+        clientId: 'CLIENT_ID',
+        clientSecret: 'CLIENT_SECRET',
+        redirectUri: 'https://auth.expo.io/@vitorlofonseca/noisera',
+        accessToken: '',
+        market: 'MARKET (US|BR...)',
     },
 }

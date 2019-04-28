@@ -1,9 +1,9 @@
-import { getTokens } from '../auth/getTokens'
+import { getSpotifyTokens } from '../auth/getSpotifyTokens'
 import { encode as btoa } from 'base-64'
 
 const env = require('../env')
 
-export const refreshTokens = async () => {
+export const refreshSpotifyTokens = async () => {
     try {
         const spotifyAccessData = env.spotify
         const credsB64 = btoa(
@@ -21,7 +21,7 @@ export const refreshTokens = async () => {
         const responseJson = await response.json()
 
         if (responseJson.error) {
-            await getTokens()
+            await getSpotifyTokens()
         } else {
             const {
                 access_token: newAccessToken,
