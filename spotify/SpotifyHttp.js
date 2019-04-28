@@ -12,7 +12,7 @@ export const SpotifyGet = requestData => {
 
     var myHeaders = new Headers()
 
-    myHeaders.append('Authorization', 'Bearer ' + env.spotify.bearer)
+    myHeaders.append('Authorization', 'Bearer ' + env.spotify.accessToken)
 
     return new Promise((resolve, reject) => {
         fetch(requestUrl, {

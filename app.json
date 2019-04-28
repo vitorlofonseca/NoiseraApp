@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "noisera",
+    "name": "Noisera",
     "slug": "noisera",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -24,6 +24,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Noisera is a React Native application to organize musical gigs. You can store songs letters, tabs, sheets, and set its characteristics, like tone, anormal interruptions, and much another things.",
+    "githubUrl": "https://github.com/vitorlofonseca/NoiseraApp"
   }
 }
