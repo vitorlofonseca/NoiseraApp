@@ -76,23 +76,23 @@ SettingsStack.navigationOptions = {
 }
 
 const LoginStack = createStackNavigator({
-  Login: LoginScreen
+    Login: LoginScreen,
 })
 
 LoginStack.navigationOptions = {
-  tabBarLabel: 'LoginScreen',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
+    tabBarLabel: 'LoginScreen',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+        />
+    ),
+}
 
 export default createBottomTabNavigator({
     HomeStack,
     GroupsStack,
     GigsStack,
     SettingsStack,
-    LoginStack
+    LoginStack,
 })
