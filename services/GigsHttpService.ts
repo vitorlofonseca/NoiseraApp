@@ -30,8 +30,6 @@ export const SaveGig = (gig: Gig) => {
     let myHeaders = new Headers()
     myHeaders.append('x-api-key', awsApiKey)
 
-    console.log('kosakosakoppkosa ', JSON.stringify(gig))
-
     return new Promise((resolve, reject) => {
         fetch(urlAwsApi + 'gig', {
             method: 'post',
