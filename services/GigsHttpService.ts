@@ -4,16 +4,22 @@ import { Gig } from '../models/GigModel'
 
 const env = require('../env.js')
 const urlAwsApi = env.aws.url + env.aws.api
+const awsApiKey = env.aws.apikey
 
 export const GetGigs = () => {
+    let myHeaders = new Headers()
+    myHeaders.append('x-api-key', awsApiKey)
+
     return new Promise((resolve, reject) => {
         fetch(urlAwsApi + '/gig', {
             method: 'get',
+            headers: myHeaders,
         })
             .then(response => {
                 let responseObject: Array<Gig> = JSON.parse(
                     response['_bodyInit']
-                )['gigs']
+                )['Gigs']
+
                 resolve(responseObject)
             })
             .catch(err => reject(err))
@@ -21,10 +27,14 @@ export const GetGigs = () => {
 }
 
 export const SaveGig = (gig: Gig) => {
+    let myHeaders = new Headers()
+    myHeaders.append('x-api-key', awsApiKey)
+
     return new Promise((resolve, reject) => {
-        fetch(urlAwsApi + '/gig', {
+        fetch(urlAwsApi + 'gig', {
             method: 'post',
             body: JSON.stringify(gig),
+            headers: myHeaders,
         })
             .then()
             .catch(err => reject(err))
@@ -69,17 +79,5 @@ export const SearchTracks = trackName => {
 
             resolve(tracks)
         })
-    })
-}
-
-export const SubmitGig = (gig: Gig) => {
-    return new Promise((resolve, reject) => {
-        fetch(urlAwsApi + '/gig', {
-            method: 'post',
-        })
-            .then(response => {
-                resolve(JSON.parse(response['_bodyInit']))
-            })
-            .catch(err => reject(err))
     })
 }

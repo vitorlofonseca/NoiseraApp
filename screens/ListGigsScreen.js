@@ -23,19 +23,23 @@ export default class ListGigsScreen extends React.Component {
         }
     }
 
-    componentDidMount() {
+    loadGigs() {
         const setState = this.setState.bind(this)
         GetGigs().then(function(gigs) {
             setState({ gigs })
         })
     }
 
+    componentDidMount() {
+        this.loadGigs()
+    }
+
     renderGig = ({ item }) => (
         <ListItem
             key={item.index}
-            leftAvatar={{ source: { uri: item.avatar_url } }}
-            title={item.name}
-            subtitle={item.description}
+            leftAvatar={{ source: { uri: item.AvatarUrl } }}
+            title={item.Name}
+            subtitle={item.Description}
         />
     )
 
@@ -68,7 +72,9 @@ export default class ListGigsScreen extends React.Component {
                             className="px-4"
                             title="Add Gig"
                             onPress={() =>
-                                this.props.navigation.navigate('AddGigScreen')
+                                this.props.navigation.navigate('AddGigScreen', {
+                                    updateGigsList: this.loadGigs.bind(this),
+                                })
                             }
                         />
                     </TouchableOpacity>
