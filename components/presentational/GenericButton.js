@@ -15,7 +15,7 @@ export default class GenericButton extends React.Component {
           <View style={styles.holder}>
             <Button
               onPress={this.props.action}
-              title={this.props.title}
+              title={this.props.title || 'Click me'}
               color={this.props.color}
               accessibilityLabel={this.props.accessibilityLabel} />
           </View>
