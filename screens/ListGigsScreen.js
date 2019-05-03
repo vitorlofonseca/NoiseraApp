@@ -34,12 +34,20 @@ export default class ListGigsScreen extends React.Component {
         this.loadGigs()
     }
 
+    openGig = gig => {
+        this.props.navigation.navigate('GigViewComponent', {
+            gig,
+        })
+    }
+
     renderGig = ({ item }) => (
         <ListItem
+            button
             key={item.index}
             leftAvatar={{ source: { uri: item.AvatarUrl } }}
             title={item.Name}
             subtitle={item.Description}
+            onPress={() => this.openGig(item)}
         />
     )
 
