@@ -1,9 +1,9 @@
 import React from 'react'
 import GroupInsert from '../components/container/GroupInsert'
 
-export default class AddGroupScreen extends React.Component {
+export default class SandboxScreen extends React.Component {
     static navigationOptions = {
-        title: 'Add Groups',
+        title: 'Sandbox',
     }
 
     render() {
