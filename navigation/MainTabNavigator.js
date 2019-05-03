@@ -10,7 +10,7 @@ import HomeScreen from '../home/HomeScreen'
 import ListGigsScreen from '../screens/ListGigsScreen'
 import ListGroupsScreen from '../screens/ListGroupsScreen'
 import AddGigScreen from '../screens/AddGigScreen'
-import AddGroupScreen from '../screens/AddGroupScreen'
+import SandboxScreen from '../screens/SandboxScreen'
 import SettingsScreen from '../settings/SettingsScreen'
 
 const HomeStack = createStackNavigator({
@@ -75,16 +75,16 @@ SettingsStack.navigationOptions = {
     ),
 }
 
-const GroupStack = createStackNavigator({
-    Settings: AddGroupScreen,
+const SandboxStack = createStackNavigator({
+    Sandbox: SandboxScreen,
 })
 
-GroupStack.navigationOptions = {
-    tabBarLabel: 'Add Group',
+SandboxStack.navigationOptions = {
+    tabBarLabel: 'Sandbox',
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+            name={Platform.OS === 'ios' ? 'ios-school' : 'md-school'}
         />
     ),
 }
@@ -94,5 +94,5 @@ export default createBottomTabNavigator({
     GroupsStack,
     GigsStack,
     SettingsStack,
-    GroupStack
+    SandboxStack,
 })
