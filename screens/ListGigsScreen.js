@@ -40,7 +40,7 @@ export default class ListGigsScreen extends React.Component {
         })
     }
 
-    renderGig = ({ item }) => (
+    renderGigItem = ({ item }) => (
         <ListItem
             button
             key={item.index}
@@ -48,6 +48,11 @@ export default class ListGigsScreen extends React.Component {
             title={item.Name}
             subtitle={item.Description}
             onPress={() => this.openGig(item)}
+            rightIcon={{
+                name: 'keyboard-arrow-right',
+                type: 'material-design',
+                style: { marginRight: 10, fontSize: 20 },
+            }}
         />
     )
 
@@ -64,7 +69,7 @@ export default class ListGigsScreen extends React.Component {
             gigsList = (
                 <FlatList
                     data={this.state.gigs}
-                    renderItem={this.renderGig}
+                    renderItem={this.renderGigItem}
                     keyExtractor={(item, index) => index.toString()}
                 />
             )

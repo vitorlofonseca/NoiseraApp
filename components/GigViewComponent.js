@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { FlatList } from 'react-native'
+import { ListItem } from 'react-native-elements'
 
 export default class GigViewComponent extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -20,7 +21,28 @@ export default class GigViewComponent extends React.Component {
         this.state.gig = this.props.navigation.state.params.gig
     }
 
+    renderTracks = track => (
+        <ListItem
+            button
+            key={track.item.index}
+            leftAvatar={{ source: { uri: track.item.image } }}
+            title={track.item.name}
+            subtitle={track.item.album + ' - ' + track.item.artist}
+            rightIcon={{
+                name: 'keyboard-arrow-right',
+                type: 'material-design',
+                style: { marginRight: 10, fontSize: 15 },
+            }}
+        />
+    )
+
     render() {
-        return <Text>this is the {this.state.gig.Name} gig</Text>
+        return (
+            <FlatList
+                data={this.state.gig.Tracks}
+                renderItem={this.renderTracks}
+                keyExtractor={(item, index) => index.toString()}
+            />
+        )
     }
 }
