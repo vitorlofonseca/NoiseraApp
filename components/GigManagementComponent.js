@@ -59,6 +59,7 @@ export default class GigManagementComponent extends React.Component {
             Name: this.state.gigName,
             Description: this.state.gigDescription,
             AvatarUrl: 'https://image.flaticon.com/icons/png/512/37/37543.png',
+            BandGUID: 'cfa40618-afee-4d94-a0a7-125505c22360', //MOCKED
             Tracks: this.state.addedTracks.map(function(addedTracks) {
                 addedTracks.order = trackIndex
                 addedTracks.active = true
