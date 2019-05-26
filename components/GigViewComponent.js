@@ -21,13 +21,21 @@ export default class GigViewComponent extends React.Component {
         this.state.gig = this.props.navigation.state.params.gig
     }
 
+    openTrackScreen = track => {
+        track.gigName = this.state.gig.Name
+        this.props.navigation.navigate('TrackViewComponent', {
+            track,
+        })
+    }
+
     renderTracks = track => (
         <ListItem
             button
-            key={track.item.index}
-            leftAvatar={{ source: { uri: track.item.image } }}
-            title={track.item.name}
-            subtitle={track.item.album + ' - ' + track.item.artist}
+            key={track.item.SpotifyId}
+            leftAvatar={{ source: { uri: track.item.Image } }}
+            title={track.item.Name}
+            subtitle={track.item.Album + ' - ' + track.item.Artist}
+            onPress={() => this.openTrackScreen(track.item)}
             rightIcon={{
                 name: 'keyboard-arrow-right',
                 type: 'material-design',
