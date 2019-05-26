@@ -27,6 +27,10 @@ export default class GigManagementComponent extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        this.props.navigation.state.params.loadGigs()
+    }
+
     addTrack = item => {
         const setState = this.setState.bind(this)
 
@@ -70,9 +74,8 @@ export default class GigManagementComponent extends React.Component {
 
         SaveGig(newGig)
 
-        this.props.navigation.state.params.updateGigsList()
-
-        this.props.navigation.goBack()
+        const { goBack } = this.props.navigation
+        goBack()
     }
 
     render() {

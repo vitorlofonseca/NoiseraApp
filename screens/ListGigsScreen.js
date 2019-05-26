@@ -86,7 +86,7 @@ export default class ListGigsScreen extends React.Component {
                             title="Add Gig"
                             onPress={() =>
                                 this.props.navigation.navigate('AddGigScreen', {
-                                    updateGigsList: this.loadGigs.bind(this),
+                                    loadGigs: () => this.loadGigs(),
                                 })
                             }
                         />
