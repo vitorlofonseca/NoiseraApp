@@ -31,10 +31,10 @@ export default class GigViewComponent extends React.Component {
     renderTracks = track => (
         <ListItem
             button
-            key={track.item.index}
-            leftAvatar={{ source: { uri: track.item.image } }}
-            title={track.item.name}
-            subtitle={track.item.album + ' - ' + track.item.artist}
+            key={track.item.SpotifyId}
+            leftAvatar={{ source: { uri: track.item.Image } }}
+            title={track.item.Name}
+            subtitle={track.item.Album + ' - ' + track.item.Artist}
             onPress={() => this.openTrackScreen(track.item)}
             rightIcon={{
                 name: 'keyboard-arrow-right',

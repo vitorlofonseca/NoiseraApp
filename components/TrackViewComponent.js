@@ -23,7 +23,7 @@ export default class TrackViewComponent extends React.Component {
     componentWillMount() {
         let track = this.props.navigation.state.params
         this.state.track = track.track
-        this.state.gig = track.name + ' - ' + track.artist
+        this.state.gig = track.Name + ' - ' + track.Artist
     }
 
     renderAttach = attach => {
@@ -59,7 +59,7 @@ export default class TrackViewComponent extends React.Component {
                     <Image
                         style={{ width: 100, height: 100 }}
                         source={{
-                            uri: track.image,
+                            uri: track.Image,
                         }}
                     />
 
@@ -70,22 +70,22 @@ export default class TrackViewComponent extends React.Component {
                                 styles.track_title,
                             ]}
                         >
-                            {track.name}
+                            {track.Name}
                         </Text>
                         <Text style={styles.track_info__text}>
-                            {track.album}
+                            {track.Album}
                         </Text>
                         <Text style={styles.track_info__text}>
-                            {track.artist}
+                            {track.Artist}
                         </Text>
                         <Text style={styles.track_info__text}>
-                            {track.year}
+                            {track.Year}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.div_row_body}>
                     <Text style={styles.info_title}>Active</Text>
-                    <Switch value={track.active} />
+                    <Switch value={track.Active} />
                 </View>
                 <View style={styles.div_row_body__without_row}>
                     <Text style={styles.info_title}>Track's attaches</Text>
