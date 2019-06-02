@@ -1,11 +1,11 @@
 import React from 'react'
 import { Text, Image, View, Switch, FlatList, TextInput } from 'react-native'
 import { ListItem } from 'react-native-elements'
-import DataNotFoundComponent from './DataNotFoundComponent'
+import DataNotFoundComponent from '../components/DataNotFoundComponent'
 
 const styles = require('./styles/TrackViewStyle')
 
-export default class TrackViewComponent extends React.Component {
+export default class TrackViewScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.state.params.track.gigName,

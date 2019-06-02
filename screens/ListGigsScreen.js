@@ -7,35 +7,23 @@ import {
     Button,
 } from 'react-native'
 import { ListItem } from 'react-native-elements'
-import { GetGigs } from '../services/GigsHttpService'
 import LoadingComponent from '../components/LoadingComponent'
 import DataNotFoundComponent from '../components/DataNotFoundComponent'
 
-export default class ListGigsScreen extends React.Component {
+import { connect } from 'react-redux'
+import { initialize_gigs } from '../store/storeActions'
+
+class ListGigsScreen extends React.Component {
     static navigationOptions = {
         title: 'Gigs',
     }
 
-    constructor() {
-        super()
-        this.state = {
-            gigs: null,
-        }
-    }
-
-    loadGigs() {
-        const setState = this.setState.bind(this)
-        GetGigs().then(function(gigs) {
-            setState({ gigs })
-        })
-    }
-
     componentDidMount() {
-        this.loadGigs()
+        this.props.initialize_gigs()
     }
 
     openGig = gig => {
-        this.props.navigation.navigate('GigViewComponent', {
+        this.props.navigation.navigate('TracksOfGigScreen', {
             gig,
         })
     }
@@ -59,16 +47,19 @@ export default class ListGigsScreen extends React.Component {
     render() {
         let gigsList = null
 
-        if (this.state.gigs === null) {
+        if (this.props.gigsReducer.gigs == null) {
             return <LoadingComponent itemName="GIGs" />
         }
 
-        if (this.state.gigs !== null && this.state.gigs.length == 0) {
+        if (
+            this.props.gigsReducer.gigs != null &&
+            this.props.gigsReducer.gigs.length == 0
+        ) {
             gigsList = <DataNotFoundComponent dataName="GIGs" />
         } else {
             gigsList = (
                 <FlatList
-                    data={this.state.gigs}
+                    data={this.props.gigsReducer.gigs}
                     renderItem={this.renderGigItem}
                     keyExtractor={(item, index) => index.toString()}
                 />
@@ -86,7 +77,7 @@ export default class ListGigsScreen extends React.Component {
                             title="Add Gig"
                             onPress={() =>
                                 this.props.navigation.navigate('AddGigScreen', {
-                                    loadGigs: () => this.loadGigs(),
+                                    loadGigs: () => initialize_gigs(),
                                 })
                             }
                         />
@@ -120,3 +111,14 @@ const styles = StyleSheet.create({
         marginTop: 1,
     },
 })
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = {
+    initialize_gigs,
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ListGigsScreen)

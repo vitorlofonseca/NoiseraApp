@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
-export default class GigViewComponent extends React.Component {
+export default class TracksOfGigScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.state.params.gig.Name,
@@ -23,7 +23,7 @@ export default class GigViewComponent extends React.Component {
 
     openTrackScreen = track => {
         track.gigName = this.state.gig.Name
-        this.props.navigation.navigate('TrackViewComponent', {
+        this.props.navigation.navigate('TrackViewScreen', {
             track,
         })
     }

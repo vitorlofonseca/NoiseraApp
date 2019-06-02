@@ -12,8 +12,8 @@ import ListGroupsScreen from '../screens/ListGroupsScreen'
 import AddGigScreen from '../screens/AddGigScreen'
 import SandboxScreen from '../screens/SandboxScreen'
 import SettingsScreen from '../settings/SettingsScreen'
-import GigViewComponent from '../components/GigViewComponent'
-import TrackViewComponent from '../components/TrackViewComponent'
+import TracksOfGigScreen from '../screens/TracksOfGigScreen'
+import TrackViewScreen from '../screens/TrackViewScreen'
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
@@ -36,8 +36,8 @@ HomeStack.navigationOptions = {
 const GigsStack = createStackNavigator({
     Gigs: ListGigsScreen,
     AddGigScreen: AddGigScreen,
-    GigViewComponent: GigViewComponent,
-    TrackViewComponent: TrackViewComponent,
+    TracksOfGigScreen: TracksOfGigScreen,
+    TrackViewScreen: TrackViewScreen,
 })
 
 GigsStack.navigationOptions = {
