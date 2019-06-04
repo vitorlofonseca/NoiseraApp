@@ -4,6 +4,7 @@ import { Icon, ListItem } from 'react-native-elements'
 import { View, Text, TextInput, FlatList } from 'react-native'
 
 import { SearchTracks } from '../services/GigsHttpService'
+import { DataNotFoundComponent } from './DataNotFoundComponent'
 
 const styles = require('./styles/GigManagementStyles')
 

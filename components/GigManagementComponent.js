@@ -10,11 +10,12 @@ import {
 } from 'react-native'
 import TracksSearchComponent from '../components/TracksSearchComponent'
 import AddedTracksListComponent from './AddedTracksListComponent'
-import { SaveGig } from '../services/GigsHttpService'
+import { save_gig } from '../store/storeActions'
+import { connect } from 'react-redux'
 
 const styles = require('./styles/GigManagementStyles')
 
-export default class GigManagementComponent extends React.Component {
+class GigManagementComponent extends React.Component {
     constructor(props) {
         super(props)
 
@@ -62,7 +63,7 @@ export default class GigManagementComponent extends React.Component {
         let newGig = {
             Name: this.state.gigName,
             Description: this.state.gigDescription,
-            AvatarUrl: 'https://image.flaticon.com/icons/png/512/37/37543.png',
+            AvatarUrl: 'https://image.flaticon.com/icons/png/512/37/37543.png', //MOCKED
             BandGUID: 'cfa40618-afee-4d94-a0a7-125505c22360', //MOCKED
             Tracks: this.state.addedTracks.map(function(addedTracks) {
                 addedTracks.order = trackIndex
@@ -72,7 +73,7 @@ export default class GigManagementComponent extends React.Component {
             }),
         }
 
-        SaveGig(newGig)
+        this.props.save_gig(newGig)
 
         const { goBack } = this.props.navigation
         goBack()
@@ -131,3 +132,14 @@ export default class GigManagementComponent extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = {
+    save_gig,
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(GigManagementComponent)

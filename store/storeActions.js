@@ -1,11 +1,22 @@
-import { GetGigs } from '../services/GigsHttpService'
+import { GetGigs, SaveGigAws } from '../services/GigsHttpService'
 
-export const initialize_gigs = () => {
+export const load_gigs = () => {
     return dispatch => {
         GetGigs().then(gigs => {
             dispatch({
                 type: 'INITIALIZE_GIGS',
                 gigs,
+            })
+        })
+    }
+}
+
+export const save_gig = gig => {
+    return dispatch => {
+        SaveGigAws(gig).then(() => {
+            dispatch({
+                type: 'SAVE_GIG',
+                gig,
             })
         })
     }

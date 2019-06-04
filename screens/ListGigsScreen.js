@@ -11,7 +11,7 @@ import LoadingComponent from '../components/LoadingComponent'
 import DataNotFoundComponent from '../components/DataNotFoundComponent'
 
 import { connect } from 'react-redux'
-import { initialize_gigs } from '../store/storeActions'
+import { load_gigs } from '../store/storeActions'
 
 class ListGigsScreen extends React.Component {
     static navigationOptions = {
@@ -19,7 +19,7 @@ class ListGigsScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.initialize_gigs()
+        this.props.load_gigs()
     }
 
     openGig = gig => {
@@ -77,7 +77,7 @@ class ListGigsScreen extends React.Component {
                             title="Add Gig"
                             onPress={() =>
                                 this.props.navigation.navigate('AddGigScreen', {
-                                    loadGigs: () => initialize_gigs(),
+                                    loadGigs: () => this.props.load_gigs(),
                                 })
                             }
                         />
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => state
 
 const mapDispatchToProps = {
-    initialize_gigs,
+    load_gigs,
 }
 
 export default connect(

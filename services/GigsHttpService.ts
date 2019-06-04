@@ -26,17 +26,16 @@ export const GetGigs = () => {
     })
 }
 
-export const SaveGig = (gig: Gig) => {
+export const SaveGigAws = (gig: Gig) => {
     let myHeaders = new Headers()
     myHeaders.append('x-api-key', awsApiKey)
-
     return new Promise((resolve, reject) => {
         fetch(urlAwsApi + 'gig', {
             method: 'post',
             body: JSON.stringify(gig),
             headers: myHeaders,
         })
-            .then()
+            .then(() => resolve(gig))
             .catch(err => reject(err))
     })
 }
