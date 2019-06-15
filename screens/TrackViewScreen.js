@@ -1,11 +1,22 @@
 import React from 'react'
-import { Text, Image, View, Switch, FlatList, TextInput } from 'react-native'
+import {
+    Text,
+    Image,
+    View,
+    Switch,
+    FlatList,
+    TextInput,
+    TouchableOpacity,
+    Button,
+} from 'react-native'
 import { ListItem } from 'react-native-elements'
 import DataNotFoundComponent from '../components/DataNotFoundComponent'
+import { save_track } from '../store/trackStoreActions'
+import { connect } from 'react-redux'
 
 const styles = require('./styles/TrackViewStyle')
 
-export default class TrackViewScreen extends React.Component {
+class TrackViewScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.state.params.track.gigName,
@@ -36,17 +47,37 @@ export default class TrackViewScreen extends React.Component {
         )
     }
 
-    render() {
-        let track = this.state.track
+    saveTrack = () => {
+        this.props.save_track(this.state.track)
 
+        const { goBack } = this.props.navigation
+        goBack()
+    }
+
+    changeTrackActive = () => {
+        let track = this.state.track
+        track.Active = !track.Active
+        this.setState({ track })
+    }
+
+    changeObservations = newObservation => {
+        let track = this.state.track
+        track.Observations = newObservation
+        this.setState({ track })
+    }
+
+    render() {
         let trackAttaches
 
-        if (!track.attaches || track.attaches.lenght == 0) {
+        if (
+            !this.state.track.attaches ||
+            this.state.track.attaches.lenght == 0
+        ) {
             trackAttaches = <DataNotFoundComponent dataName="Attaches" />
         } else {
             trackAttaches = (
                 <FlatList
-                    data={track.attaches}
+                    data={this.state.track.attaches}
                     style={styles.box}
                     renderItem={this.renderAttach}
                     keyExtractor={(item, index) => index.toString()}
@@ -59,7 +90,7 @@ export default class TrackViewScreen extends React.Component {
                     <Image
                         style={{ width: 100, height: 100 }}
                         source={{
-                            uri: track.Image,
+                            uri: this.state.track.Image,
                         }}
                     />
 
@@ -70,22 +101,25 @@ export default class TrackViewScreen extends React.Component {
                                 styles.track_title,
                             ]}
                         >
-                            {track.Name}
+                            {this.state.track.Name}
                         </Text>
                         <Text style={styles.track_info__text}>
-                            {track.Album}
+                            {this.state.track.Album}
                         </Text>
                         <Text style={styles.track_info__text}>
-                            {track.Artist}
+                            {this.state.track.Artist}
                         </Text>
                         <Text style={styles.track_info__text}>
-                            {track.Year}
+                            {this.state.track.Year}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.div_row_body}>
                     <Text style={styles.info_title}>Active</Text>
-                    <Switch value={track.Active} />
+                    <Switch
+                        value={this.state.track.Active}
+                        onValueChange={this.changeTrackActive}
+                    />
                 </View>
                 <View style={styles.div_row_body__without_row}>
                     <Text style={styles.info_title}>Track's attaches</Text>
@@ -97,10 +131,33 @@ export default class TrackViewScreen extends React.Component {
                         multiline={true}
                         numberOfLines={4}
                         style={styles.box}
-                        value={track.observations}
+                        value={this.state.track.observations}
+                        onChangeText={text => this.changeObservations(text)}
                     />
+                </View>
+
+                <View style={[styles.box, styles.btnSaveGig]}>
+                    <TouchableOpacity>
+                        <Button
+                            color="grey"
+                            className="px-4"
+                            title="Save Track"
+                            onPress={this.saveTrack}
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
         )
     }
 }
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = {
+    save_track,
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TrackViewScreen)

@@ -4,7 +4,7 @@ export const load_gigs = () => {
     return dispatch => {
         GetGigs().then(gigs => {
             dispatch({
-                type: 'INITIALIZE_GIGS',
+                type: 'LOAD_GIGS',
                 gigs,
             })
         })

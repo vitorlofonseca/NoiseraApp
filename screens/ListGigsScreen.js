@@ -11,7 +11,7 @@ import LoadingComponent from '../components/LoadingComponent'
 import DataNotFoundComponent from '../components/DataNotFoundComponent'
 
 import { connect } from 'react-redux'
-import { load_gigs } from '../store/storeActions'
+import { load_gigs } from '../store/gigStoreActions'
 
 class ListGigsScreen extends React.Component {
     static navigationOptions = {
@@ -47,19 +47,19 @@ class ListGigsScreen extends React.Component {
     render() {
         let gigsList = null
 
-        if (this.props.gigsReducer.gigs == null) {
+        if (this.props.reducer.gigs == null) {
             return <LoadingComponent itemName="GIGs" />
         }
 
         if (
-            this.props.gigsReducer.gigs != null &&
-            this.props.gigsReducer.gigs.length == 0
+            this.props.reducer.gigs != null &&
+            this.props.reducer.gigs.length == 0
         ) {
             gigsList = <DataNotFoundComponent dataName="GIGs" />
         } else {
             gigsList = (
                 <FlatList
-                    data={this.props.gigsReducer.gigs}
+                    data={this.props.reducer.gigs}
                     renderItem={this.renderGigItem}
                     keyExtractor={(item, index) => index.toString()}
                 />

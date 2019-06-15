@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import TracksSearchComponent from '../components/TracksSearchComponent'
 import AddedTracksListComponent from './AddedTracksListComponent'
-import { save_gig } from '../store/storeActions'
+import { save_gig } from '../store/gigStoreActions'
 import { connect } from 'react-redux'
 
 const styles = require('./styles/GigManagementStyles')

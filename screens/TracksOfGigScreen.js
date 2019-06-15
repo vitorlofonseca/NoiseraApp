@@ -23,6 +23,7 @@ export default class TracksOfGigScreen extends React.Component {
 
     openTrackScreen = track => {
         track.gigName = this.state.gig.Name
+        track.gigGUID = this.state.gig.GUID
         this.props.navigation.navigate('TrackViewScreen', {
             track,
         })
