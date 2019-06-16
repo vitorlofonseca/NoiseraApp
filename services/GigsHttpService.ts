@@ -5,9 +5,9 @@ import { Gig } from '../models/GigModel'
 const env = require('../env.js')
 const urlAwsApi = env.aws.url + env.aws.api
 const awsApiKey = env.aws.apikey
+let myHeaders = new Headers()
 
 export const GetGigs = () => {
-    let myHeaders = new Headers()
     myHeaders.append('x-api-key', awsApiKey)
 
     return new Promise((resolve, reject) => {
@@ -27,7 +27,6 @@ export const GetGigs = () => {
 }
 
 export const SaveGigAws = (gig: Gig) => {
-    let myHeaders = new Headers()
     myHeaders.append('x-api-key', awsApiKey)
     return new Promise((resolve, reject) => {
         fetch(urlAwsApi + 'gig', {
@@ -37,6 +36,22 @@ export const SaveGigAws = (gig: Gig) => {
         })
             .then(() => {
                 resolve(gig)
+            })
+            .catch(err => reject(err))
+    })
+}
+
+export const UpdateTracksOrder = (tracks: Array<Track>, gigGUID: string) => {
+    let body = { gigGUID, tracks }
+    myHeaders.append('x-api-key', awsApiKey)
+    return new Promise((resolve, reject) => {
+        fetch(urlAwsApi + 'gig/updateTracksOrder', {
+            method: 'post',
+            body: JSON.stringify(body),
+            headers: myHeaders,
+        })
+            .then(() => {
+                resolve(tracks)
             })
             .catch(err => reject(err))
     })

@@ -131,7 +131,7 @@ class TrackViewScreen extends React.Component {
                         multiline={true}
                         numberOfLines={4}
                         style={styles.box}
-                        value={this.state.track.observations}
+                        value={this.state.track.Observations}
                         onChangeText={text => this.changeObservations(text)}
                     />
                 </View>

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 let gigs
+let gig
 
 const reducer = (state = {}, action) => {
     const updateTrackOnGig = (gig, updatedTrack) => {
@@ -29,12 +30,8 @@ const reducer = (state = {}, action) => {
             return state
         case 'SAVE_TRACK':
             let updatedTrack = action.track
-
-            let gig = getGigByTrack(state, updatedTrack)
-
+            gig = getGigByTrack(state, updatedTrack)
             updateTrackOnGig(gig, updatedTrack)
-
-            console.log('QWE', gig)
             return state
         default:
             return state
