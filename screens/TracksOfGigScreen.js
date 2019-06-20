@@ -40,22 +40,25 @@ class TracksOfGigScreen extends React.Component {
 
     renderTrack = ({ item, index, move, moveEnd, isActive }) => {
         let track = item.track
+
         return (
-            <ListItem
-                button
-                key={track.SpotifyId}
-                leftAvatar={{ source: { uri: track.Image } }}
-                title={track.Name}
-                subtitle={track.Album + ' - ' + track.Artist}
-                onPress={() => this.openTrackScreen(track)}
-                onLongPress={move}
-                onPressOut={moveEnd}
-                rightIcon={{
-                    name: 'keyboard-arrow-right',
-                    type: 'material-design',
-                    style: { marginRight: 10, fontSize: 15 },
-                }}
-            />
+            <View opacity={track.Active ? 1 : 0.2}>
+                <ListItem
+                    button
+                    key={track.SpotifyId}
+                    leftAvatar={{ source: { uri: track.Image } }}
+                    title={track.Name}
+                    subtitle={track.Album + ' - ' + track.Artist}
+                    onPress={() => this.openTrackScreen(track)}
+                    onLongPress={move}
+                    onPressOut={moveEnd}
+                    rightIcon={{
+                        name: 'keyboard-arrow-right',
+                        type: 'material-design',
+                        style: { marginRight: 10, fontSize: 15 },
+                    }}
+                />
+            </View>
         )
     }
 

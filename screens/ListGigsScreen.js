@@ -32,7 +32,6 @@ class ListGigsScreen extends React.Component {
         <ListItem
             button
             key={item.index}
-            leftAvatar={{ source: { uri: item.AvatarUrl } }}
             title={item.Name}
             subtitle={item.Description}
             onPress={() => this.openGig(item)}
