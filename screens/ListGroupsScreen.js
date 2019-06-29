@@ -15,7 +15,7 @@ import { load_groups } from '../store/groupStoreActions'
 
 class ListGroupsScreen extends React.Component {
    static navigationOptions = {
-      title: 'Groups',
+      title: 'Bands',
    }
 
    componentDidMount() {
@@ -28,7 +28,19 @@ class ListGroupsScreen extends React.Component {
       })
    }
 
-   renderBand = ({ item }) => <ListItem key={item.index} title={item.Name} />
+   listGigsOfBand = band => {
+      this.props.navigation.navigate('ListGigsScreen', {
+         band,
+      })
+   }
+
+   renderBand = ({ item }) => (
+      <ListItem
+         onPress={() => this.listGigsOfBand(item)}
+         key={item.index}
+         title={item.Name}
+      />
+   )
 
    render() {
       let groupsList = null
@@ -60,7 +72,7 @@ class ListGroupsScreen extends React.Component {
                   <Button
                      color="grey"
                      className="px-4"
-                     title="Add Group"
+                     title="Add Band"
                      onPress={() =>
                         this.props.navigation.navigate('AddGroupScreen', {
                            loadGroups: () => this.loadGroups(),

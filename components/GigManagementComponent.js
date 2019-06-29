@@ -1,12 +1,12 @@
 import React from 'react'
 import {
-    Alert,
-    View,
-    Text,
-    TextInput,
-    ScrollView,
-    TouchableOpacity,
-    Button,
+   Alert,
+   View,
+   Text,
+   TextInput,
+   ScrollView,
+   TouchableOpacity,
+   Button,
 } from 'react-native'
 import TracksSearchComponent from '../components/TracksSearchComponent'
 import AddedTracksListComponent from './AddedTracksListComponent'
@@ -16,130 +16,130 @@ import { connect } from 'react-redux'
 const styles = require('./styles/GigManagementStyles')
 
 class GigManagementComponent extends React.Component {
-    constructor(props) {
-        super(props)
+   band = this.props.navigation.state.params.band
 
-        this.state = {
-            gigName: '',
-            gigDescription: '',
-            foundTracks: [],
-            addedTracks: [],
-            searchHappened: false,
-        }
-    }
+   constructor(props) {
+      super(props)
 
-    componentWillUnmount() {
-        this.props.navigation.state.params.loadGigs()
-    }
+      this.state = {
+         gigName: '',
+         gigDescription: '',
+         foundTracks: [],
+         addedTracks: [],
+         searchHappened: false,
+      }
+   }
 
-    addTrack = item => {
-        const setState = this.setState.bind(this)
+   componentWillUnmount() {
+      this.props.navigation.state.params.loadGigs()
+   }
 
-        var index = this.state.addedTracks.find(function(addedTrack) {
-            return addedTrack.spotifyId == item.spotifyId
-        })
+   addTrack = item => {
+      const setState = this.setState.bind(this)
 
-        if (index == null) {
-            let newAddedTracksArray = this.state.addedTracks
-            newAddedTracksArray.push(item)
+      var index = this.state.addedTracks.find(function(addedTrack) {
+         return addedTrack.spotifyId == item.spotifyId
+      })
 
-            setState({ addedTracks: newAddedTracksArray })
-        }
-    }
+      if (index == null) {
+         let newAddedTracksArray = this.state.addedTracks
+         newAddedTracksArray.push(item)
 
-    saveGig = () => {
-        if (!this.state.gigName) {
-            Alert.alert(':(', 'You need to define a name to gig')
-            return
-        }
+         setState({ addedTracks: newAddedTracksArray })
+      }
+   }
 
-        if (this.state.addedTracks.length == 0) {
-            Alert.alert(':(', 'You need add at least one track to the gig')
-            return
-        }
+   saveGig = () => {
+      if (!this.state.gigName) {
+         Alert.alert(':(', 'You must define a name to gig')
+         return
+      }
 
-        let trackIndex = 0
+      if (this.state.addedTracks.length == 0) {
+         Alert.alert(':(', 'You must add at least one track to the gig')
+         return
+      }
 
-        let newGig = {
-            Name: this.state.gigName,
-            Description: this.state.gigDescription,
-            AvatarUrl: 'https://image.flaticon.com/icons/png/512/37/37543.png', //MOCKED
-            BandGUID: 'cfa40618-afee-4d94-a0a7-125505c22360', //MOCKED
-            Tracks: this.state.addedTracks.map(function(addedTracks) {
-                addedTracks.order = trackIndex
-                addedTracks.active = true
-                trackIndex++
-                return addedTracks
-            }),
-        }
+      let trackIndex = 0
 
-        this.props.save_gig(newGig)
+      let newGig = {
+         Name: this.state.gigName,
+         Description: this.state.gigDescription,
+         AvatarUrl: 'https://image.flaticon.com/icons/png/512/37/37543.png', //MOCKED
+         BandGUID: this.band.GUID,
+         Tracks: this.state.addedTracks.map(function(addedTracks) {
+            addedTracks.order = trackIndex
+            addedTracks.active = true
+            trackIndex++
+            return addedTracks
+         }),
+      }
 
-        const { goBack } = this.props.navigation
-        goBack()
-    }
+      this.props.save_gig(newGig)
 
-    render() {
-        return (
-            <ScrollView style={styles.rootView}>
-                <View style={styles.box}>
-                    <Text style={styles.boxTitle}>General Informations</Text>
-                    <TextInput
-                        style={styles.inputText}
-                        placeholder="Gig name"
-                        selectionColor="#000000"
-                        underlineColorAndroid="#555555"
-                        onChangeText={text => this.setState({ gigName: text })}
-                    />
+      const { goBack } = this.props.navigation
+      goBack()
+   }
 
-                    <TextInput
-                        style={styles.inputText}
-                        placeholder="Gig description"
-                        selectionColor="#000000"
-                        underlineColorAndroid="#555555"
-                        onChangeText={text =>
-                            this.setState({ gigDescription: text })
-                        }
-                    />
-                </View>
+   render() {
+      return (
+         <ScrollView style={styles.rootView}>
+            <View style={styles.box}>
+               <Text style={styles.boxTitle}>General Informations</Text>
+               <TextInput
+                  style={styles.inputText}
+                  placeholder="Gig name"
+                  selectionColor="#000000"
+                  underlineColorAndroid="#555555"
+                  onChangeText={text => this.setState({ gigName: text })}
+               />
 
-                <View style={styles.box}>
-                    <TracksSearchComponent
-                        setParentState={this.setState.bind(this)}
-                        addTrack={this.addTrack}
-                    />
-                </View>
+               <TextInput
+                  style={styles.inputText}
+                  placeholder="Gig description"
+                  selectionColor="#000000"
+                  underlineColorAndroid="#555555"
+                  onChangeText={text => this.setState({ gigDescription: text })}
+               />
+            </View>
 
-                <View style={styles.box}>
-                    <AddedTracksListComponent
-                        setParentState={this.setState.bind(this)}
-                        addedTracks={this.state.addedTracks}
-                        searchHappened={this.state.searchHappened}
-                    />
-                </View>
+            <View style={styles.box}>
+               <TracksSearchComponent
+                  setParentState={this.setState.bind(this)}
+                  addTrack={this.addTrack}
+               />
+            </View>
 
-                <View style={[styles.box, styles.btnSaveGig]}>
-                    <TouchableOpacity>
-                        <Button
-                            color="grey"
-                            className="px-4"
-                            title="Save Gig"
-                            onPress={() => this.saveGig()}
-                        />
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-        )
-    }
+            <View style={styles.box}>
+               <AddedTracksListComponent
+                  setParentState={this.setState.bind(this)}
+                  addedTracks={this.state.addedTracks}
+                  searchHappened={this.state.searchHappened}
+               />
+            </View>
+
+            <View style={[styles.box, styles.btnSaveGig]}>
+               <TouchableOpacity>
+                  <Button
+                     color="grey"
+                     className="px-4"
+                     title="Save Gig"
+                     onPress={() => this.saveGig()}
+                  />
+               </TouchableOpacity>
+            </View>
+         </ScrollView>
+      )
+   }
 }
 
 const mapStateToProps = state => state
 
 const mapDispatchToProps = {
-    save_gig,
+   save_gig,
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+   mapStateToProps,
+   mapDispatchToProps
 )(GigManagementComponent)

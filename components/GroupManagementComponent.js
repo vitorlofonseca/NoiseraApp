@@ -122,7 +122,7 @@ class GroupManagementComponent extends React.Component {
                   <Button
                      color="grey"
                      className="px-4"
-                     title="Save Gig"
+                     title="Save Band"
                      onPress={() => this.saveGroup()}
                   />
                </TouchableOpacity>

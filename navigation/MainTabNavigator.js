@@ -34,26 +34,13 @@ HomeStack.navigationOptions = {
    ),
 }
 
-const GigsStack = createStackNavigator({
-   Gigs: ListGigsScreen,
-   AddGigScreen: AddGigScreen,
-   TracksOfGigScreen: TracksOfGigScreen,
-   TrackViewScreen: TrackViewScreen,
-})
-
-GigsStack.navigationOptions = {
-   tabBarLabel: 'Gigs',
-   tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-         focused={focused}
-         name={Platform.OS === 'ios' ? 'ios-mic' : 'md-mic'}
-      />
-   ),
-}
-
 const GroupsStack = createStackNavigator({
    Groups: ListGroupsScreen,
    AddGroupScreen: AddGroupScreen,
+   ListGigsScreen: ListGigsScreen,
+   AddGigScreen: AddGigScreen,
+   TracksOfGigScreen: TracksOfGigScreen,
+   TrackViewScreen: TrackViewScreen,
 })
 
 GroupsStack.navigationOptions = {
@@ -97,7 +84,6 @@ SandboxStack.navigationOptions = {
 export default createBottomTabNavigator({
    HomeStack,
    GroupsStack,
-   GigsStack,
    SettingsStack,
    SandboxStack,
 })
