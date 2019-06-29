@@ -28,7 +28,7 @@ class GroupManagementComponent extends React.Component {
    }
 
    componentWillUnmount() {
-      //this.props.navigation.state.params.loadGigs()
+      this.props.navigation.state.params.loadGroups()
    }
 
    saveGroup = () => {

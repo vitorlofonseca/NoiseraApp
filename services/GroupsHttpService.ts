@@ -10,15 +10,14 @@ export const GetGroups = userId => {
    myHeaders.append('x-api-key', awsApiKey)
 
    return new Promise((resolve, reject) => {
-      fetch(urlAwsApi + '/band/' + userId, {
+      fetch(urlAwsApi + 'band/?spotifyUserId=' + userId, {
          method: 'get',
          headers: myHeaders,
       })
          .then(response => {
             let responseObject: Array<Group> = JSON.parse(
                response['_bodyInit']
-            )['Groups']
-
+            )['bands']
             resolve(responseObject)
          })
          .catch(err => reject(err))

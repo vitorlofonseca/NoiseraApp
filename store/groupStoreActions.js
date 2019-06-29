@@ -1,8 +1,8 @@
 import { GetGroups, SaveGroupAws } from '../services/GroupsHttpService'
 
-export const load_groups = () => {
+export const load_groups = userId => {
    return dispatch => {
-      GetGroups().then(groups => {
+      GetGroups(userId).then(groups => {
          dispatch({
             type: 'LOAD_GROUPS',
             groups,
