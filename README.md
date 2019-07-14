@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Noisera is a React Native application to organize musical gigs. You can store songs letters, tabs, sheets, and set its characteristics, like tone, anormal interruptions, and much another things.
+Noisera is a React Native application to organize musical gigs. You can organize songs and yours letters, and specify its characteristics, like tone, anormal interruptions, and much another things.
 
 ### Install (Android)
 
